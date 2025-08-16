@@ -44,18 +44,10 @@ tanggal 16 Agustus
 
 5. Cek Hasil
 
-* Bridge1 (admin) → akses penuh ke Mikrotik dan internet.
+* Bridge1 (admin) -> akses penuh ke Mikrotik dan internet.
+
+* Bridge10 (client) -> hanya bisa internet, akses Mikrotik terblokir.
   
-![m]()
-
-![m]()
-
-* Bridge10 (client) → hanya bisa internet, akses Mikrotik terblokir.
-  
-![m]()
-
-![m]()
-
 # Kesimpulan
 
 Bridging firewall di Mikrotik mengatur dua fungsi sekaligus yang dimana menggabungkan
