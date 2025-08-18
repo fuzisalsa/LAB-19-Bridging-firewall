@@ -1,7 +1,7 @@
 # LAB-19-Bridging-firewall
 tanggal 16 Agustus 
 
-![p]()
+![p](LLLLLLLLLLLLLLLLLLLLL.PNG)
 
 # Langkah Konfigurasi Bridging Firewall di Mikrotik via terminal 
 
