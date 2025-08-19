@@ -5,6 +5,11 @@ tanggal 16 Agustus
 
 # Langkah Konfigurasi Bridging Firewall di Mikrotik via terminal 
 
+1. Buat DHCP Client ke interface yang terhubung ke internet untuk akses internet
+   IP > DHCP CLIENT.
+
+      
+
 1. Buat Bridge untuk Admin
 
 ```bash
@@ -21,14 +26,14 @@ tanggal 16 Agustus
 /interface bridge port add bridge=bridge10 interface=eth5
 ```
 
-3. Konfigurasi IP Address (opsional)
+3. Konfigurasi IP Address 
 
 ```bash
-/ip address add address=192.168.x.1/24 interface=bridge1
-/ip address add address=10.16.x.1/24 interface=bridge10
+/ip address add address=192.168.10.1/24 interface=bridge1
+/ip address add address=10.16.10.1/24 interface=bridge10
 ```
-
-4. Atur Firewall Filter.
+5. Buat DHCP server untuk setiap bridge interface, IP > DHCP SERVER > DHCP SETUP.
+4. Tambahkan Firewall Filter untuk Membatasi Hak Akses Client, IP > FIREWALL > FILTER RULES > ADD.
    
 **Blokir Client Akses ke Mikrotik**
 
@@ -43,10 +48,8 @@ tanggal 16 Agustus
 ```
 
 5. Cek Hasil
-
-* Bridge1 (admin) -> akses penuh ke Mikrotik dan internet.
-
-* Bridge10 (client) -> hanya bisa internet, akses Mikrotik terblokir.
+   interface clinet
+   interface admin
   
 # Kesimpulan
 
