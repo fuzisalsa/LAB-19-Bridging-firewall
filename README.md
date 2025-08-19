@@ -8,9 +8,9 @@ tanggal 16 Agustus
 1. Buat DHCP Client ke interface yang terhubung ke internet untuk akses internet
    IP > DHCP CLIENT.
 
-      
+     ip dhcp-client add interface=ether1  
 
-1. Buat Bridge untuk Admin
+2. Buat Bridge untuk Admin
 
 ```bash
 /interface bridge add name=bridge1
@@ -18,7 +18,7 @@ tanggal 16 Agustus
 /interface bridge port add bridge=bridge1 interface=eth3
 ```
 
-2. Buat Bridge untuk Client
+3. Buat Bridge untuk Client
 
 ```bash
 /interface bridge add name=bridge10
@@ -26,31 +26,35 @@ tanggal 16 Agustus
 /interface bridge port add bridge=bridge10 interface=eth5
 ```
 
-3. Konfigurasi IP Address 
+4. Konfigurasi IP Address 
 
 ```bash
 /ip address add address=192.168.10.1/24 interface=bridge1
 /ip address add address=10.16.10.1/24 interface=bridge10
 ```
 5. Buat DHCP server untuk setiap bridge interface, IP > DHCP SERVER > DHCP SETUP.
-4. Tambahkan Firewall Filter untuk Membatasi Hak Akses Client, IP > FIREWALL > FILTER RULES > ADD.
-   
-**Blokir Client Akses ke Mikrotik**
 
-```bash
-/ip firewall filter add chain=input in-interface=bridge10 action=drop comment="Block access to Mikrotik from client"
-```
+    ip dhcp-server setup (bridge1)
+   ip dhcp-server setup (bridge10)
 
-**Izinkan Internet untuk Client**
+6. Aktifkan Firewall NAT agar jaringan lokal bisa mengakses internet, IP > FIREWALL > NAT> ADD.
 
-```bash
-/ip firewall filter add chain=forward in-interface=bridge10 out-interface=eth1 action=accept comment="Allow internet for client"
-```
-
-5. Cek Hasil
-   interface clinet
-   interface admin
+       ip firewall nat add chain=srcnat action=masquerade out-interface=ether1
   
+7. Tambahkan Firewall Filter untuk Membatasi Hak Akses Client,
+   IP > FIREWALL > FILTER RULES > ADD.
+
+![m](klkl.PNG)
+
+8. Cek Hasil
+   interface clinet
+
+![m](wer.PNG)
+
+   interface admin
+
+![m](zaawer.PNG)
+
 # Kesimpulan
 
 Bridging firewall di Mikrotik mengatur dua fungsi sekaligus yang dimana menggabungkan
